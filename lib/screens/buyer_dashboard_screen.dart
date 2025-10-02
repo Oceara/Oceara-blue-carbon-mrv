@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../providers/auth_provider.dart';
 import '../services/land_service.dart';
+import '../widgets/reference_widget.dart';
 
 class BuyerDashboardScreen extends StatelessWidget {
   static const String routeName = '/buyer-dashboard';
@@ -210,6 +211,9 @@ class BuyerDashboardScreen extends StatelessWidget {
                       },
                     ),
             ),
+            
+            // Reference Widget
+            const ReferenceWidget(),
           ],
         ),
       ),

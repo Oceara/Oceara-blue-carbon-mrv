@@ -120,6 +120,30 @@ class AuthProvider extends ChangeNotifier {
     await _saveUser();
     notifyListeners();
   }
+
+  // Google Sign-In method
+  Future<void> signInWithGoogle({
+    required String email,
+    required String name,
+    required UserRole role,
+  }) async {
+    try {
+      // Create user from Google account
+      final user = AppUser(
+        id: email, // Use email as ID for Google users
+        name: name,
+        mobile: email, // Use email as mobile for Google users
+        address: 'Google Account',
+        role: role,
+      );
+
+      _currentUser = user;
+      await _saveUser();
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to sign in with Google: $e');
+    }
+  }
 }
 
 

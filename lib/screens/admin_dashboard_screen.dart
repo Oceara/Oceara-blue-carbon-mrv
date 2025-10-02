@@ -8,6 +8,7 @@ import '../models/land.dart';
 import '../models/user.dart';
 import '../models/role.dart';
 import '../services/land_service.dart';
+import '../widgets/reference_widget.dart';
 import '../services/storage_service.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class AdminDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         appBar: AppBar(
           title: FutureBuilder<List<AppUser>>(
@@ -85,6 +86,7 @@ class AdminDashboardScreen extends StatelessWidget {
               Tab(text: 'Registry'),
               Tab(text: 'Users'),
               Tab(text: 'Monitoring'),
+              Tab(text: 'Contact'),
             ],
           ),
         ),
@@ -95,6 +97,7 @@ class AdminDashboardScreen extends StatelessWidget {
             _RegistryTab(),
             _UsersTab(),
             _MonitoringTab(),
+            _ContactTab(),
           ],
         ),
       ),
@@ -477,6 +480,17 @@ class _CreditDatum {
   final String label;
   final double value;
   _CreditDatum(this.label, this.value);
+}
+
+class _ContactTab extends StatelessWidget {
+  const _ContactTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SingleChildScrollView(
+      child: ReferenceWidget(),
+    );
+  }
 }
 
 

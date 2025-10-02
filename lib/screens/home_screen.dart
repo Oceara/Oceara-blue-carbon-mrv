@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
 import '../services/land_service.dart';
+import '../widgets/reference_widget.dart';
 import 'map_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -124,6 +125,9 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
             ),
+            
+            // Reference Widget
+            const ReferenceWidget(),
           ],
         ),
       ),

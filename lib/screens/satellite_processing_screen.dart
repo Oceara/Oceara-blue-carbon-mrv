@@ -43,7 +43,13 @@ class _SatelliteProcessingScreenState extends State<SatelliteProcessingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Processing Satellite Data')),
+      appBar: AppBar(
+        title: const Text('Processing Satellite Data'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Center(
         child: _done
             ? Column(

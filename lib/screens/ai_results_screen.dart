@@ -35,7 +35,13 @@ class AIResultsScreen extends StatelessWidget {
     final totalCredits = carbonData.fold(0.0, (sum, item) => sum + item.value);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('AI Carbon Stock Estimation')),
+      appBar: AppBar(
+        title: const Text('AI Carbon Stock Estimation'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

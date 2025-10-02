@@ -30,7 +30,13 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     final user = context.watch<AuthProvider>().currentUser;
     return Scaffold(
-      appBar: AppBar(title: const Text('Pin Land Location')),
+      appBar: AppBar(
+        title: const Text('Pin Land Location'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Column(
         children: [
           Builder(builder: (context) {
@@ -43,15 +49,33 @@ class _MapScreenState extends State<MapScreen> {
           }),
           Expanded(
             child: GoogleMap(
-        initialCameraPosition: _initialPosition,
-        onMapCreated: (c) => _controller = c,
-        onTap: (pos) => setState(() => _pinned = pos),
-        markers: {
-          if (_pinned != null)
-            Marker(markerId: const MarkerId('pin'), position: _pinned!),
-        },
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
+              initialCameraPosition: _initialPosition,
+              onMapCreated: (GoogleMapController controller) {
+                _controller = controller;
+                print('Google Maps initialized successfully');
+              },
+              onTap: (LatLng position) {
+                setState(() {
+                  _pinned = position;
+                  print('Map tapped at: ${position.latitude}, ${position.longitude}');
+                });
+              },
+              markers: {
+                if (_pinned != null)
+                  Marker(
+                    markerId: const MarkerId('pin'),
+                    position: _pinned!,
+                    infoWindow: InfoWindow(
+                      title: 'Selected Location',
+                      snippet: '${_pinned!.latitude.toStringAsFixed(4)}, ${_pinned!.longitude.toStringAsFixed(4)}',
+                    ),
+                  ),
+              },
+              mapType: MapType.normal,
+              myLocationButtonEnabled: false,
+              myLocationEnabled: false,
+              zoomControlsEnabled: true,
+              compassEnabled: true,
             ),
           ),
         ],
