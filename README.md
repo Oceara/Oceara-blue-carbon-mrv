@@ -143,6 +143,43 @@ flutter build web
 - Registry maintenance
 - Monitoring analytics
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Flutter SDK (latest stable version)
+- Android Studio / VS Code
+- Google Cloud Console account
+- Google Maps API key
+- Google Sign-In OAuth credentials
+
+### Installation
+1. Clone the repository
+2. Run `flutter pub get`
+3. Configure Google APIs (see [NEXT_STEPS.md](NEXT_STEPS.md))
+4. Run `flutter run`
+
+### ⚡ Quick Setup Checklist
+- [ ] Get Google Maps API key
+- [ ] Set up Google Sign-In OAuth
+- [ ] Update API keys in config files
+- [ ] Test authentication flows
+- [ ] Test Google Maps functionality
+
+**📋 For detailed setup instructions, see [NEXT_STEPS.md](NEXT_STEPS.md)**
+
+## 🔧 Configuration Files
+
+### Required Setup
+- `android/app/src/main/AndroidManifest.xml` - Google Maps API key
+- `ios/Runner/Info.plist` - Google Maps API key
+- `google-services.json` - Google Sign-In (Android)
+- `GoogleService-Info.plist` - Google Sign-In (iOS)
+
+### Documentation
+- [NEXT_STEPS.md](NEXT_STEPS.md) - Complete setup guide
+- [GOOGLE_MAPS_SETUP.md](GOOGLE_MAPS_SETUP.md) - Maps troubleshooting
+- [GOOGLE_SIGNIN_SETUP.md](GOOGLE_SIGNIN_SETUP.md) - Authentication setup
+
 ## Contributing
 
 1. Fork the repository
