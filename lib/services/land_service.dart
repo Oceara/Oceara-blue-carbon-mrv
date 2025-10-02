@@ -163,6 +163,63 @@ class LandService extends ChangeNotifier {
     _lastRefreshAt = DateTime.now();
     notifyListeners();
   }
+
+  // Seed demo data for buyers
+  Future<void> seedDemoData() async {
+    await _initialize();
+    
+    // Check if demo data already exists
+    if (_storage.any((land) => land.label.contains('Demo'))) {
+      return; // Demo data already exists
+    }
+
+    final demoLands = [
+      LandParcel(
+        id: 'demo_1',
+        label: 'Demo Mangrove Forest - Sundarbans',
+        latitude: 21.9497,
+        longitude: 88.9201,
+        ownerUserId: 'demo_owner_1',
+        status: LandStatus.approved,
+      ),
+      LandParcel(
+        id: 'demo_2',
+        label: 'Demo Coastal Wetland - Kerala',
+        latitude: 9.9312,
+        longitude: 76.2673,
+        ownerUserId: 'demo_owner_2',
+        status: LandStatus.approved,
+      ),
+      LandParcel(
+        id: 'demo_3',
+        label: 'Demo Blue Carbon Reserve - Goa',
+        latitude: 15.2993,
+        longitude: 74.1240,
+        ownerUserId: 'demo_owner_3',
+        status: LandStatus.approved,
+      ),
+      LandParcel(
+        id: 'demo_4',
+        label: 'Demo Seagrass Meadow - Tamil Nadu',
+        latitude: 10.7905,
+        longitude: 79.1378,
+        ownerUserId: 'demo_owner_4',
+        status: LandStatus.approved,
+      ),
+    ];
+
+    for (final land in demoLands) {
+      _storage.add(land);
+      // Add some credit history for each demo land
+      final baseCredits = [8.5, 12.3, 6.7, 15.2][demoLands.indexOf(land)];
+      await addCredit(landId: land.id, creditsTco2e: baseCredits);
+      await addCredit(landId: land.id, creditsTco2e: baseCredits + 1.2);
+      await addCredit(landId: land.id, creditsTco2e: baseCredits + 0.8);
+    }
+
+    await _saveData();
+    notifyListeners();
+  }
 }
 
 

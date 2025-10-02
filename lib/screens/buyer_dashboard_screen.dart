@@ -33,6 +33,18 @@ class BuyerDashboardScreen extends StatelessWidget {
         title: Text('Welcome, $name'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () async {
+              await landService.seedDemoData();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Demo data loaded!')),
+                );
+              }
+            },
+            tooltip: 'Load Demo Data',
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               context.read<AuthProvider>().logout();
@@ -134,16 +146,33 @@ class BuyerDashboardScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Expanded(
               child: approved.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.agriculture, size: 64, color: Colors.grey),
-                          SizedBox(height: 16),
-                          Text('No verified lands available yet', 
+                          const Icon(Icons.agriculture, size: 64, color: Colors.grey),
+                          const SizedBox(height: 16),
+                          const Text('No verified lands available yet', 
                                style: TextStyle(fontSize: 16, color: Colors.grey)),
-                          SizedBox(height: 8),
-                          Text('Check back later for carbon credit opportunities'),
+                          const SizedBox(height: 8),
+                          const Text('Check back later for carbon credit opportunities'),
+                          const SizedBox(height: 24),
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              await landService.seedDemoData();
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Demo data loaded!')),
+                                );
+                              }
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text('Load Demo Data'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     )
